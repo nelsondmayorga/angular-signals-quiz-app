@@ -1,0 +1,30 @@
+<div class="quiz">
+    @if (quizService.error()) {
+        <div class="results">
+            <div class="congrulations">Server Error</div>
+            <div class="results-info">
+                <div>{{ quizService.error() }}</div>
+            </div>
+        </div>
+    }
+
+    @if (quizService.showResults()) {
+        <div class="results">
+            <div class="congrulations">Congrulations!</div>
+            <div class="results-info">
+                <div>You have completed the quiz!</div>
+                <div>You've got {{ quizService.correctAnswersCount() }} of {{ quizService.questions().length }} right</div>
+            </div>
+            <div class="next-button" (click)="restart()">Restart</div>
+        </div>
+    } @else {
+        <div>
+            <div class="score">Question {{ quizService.currentQuestionIndex() + 1 }}/{{ quizService.questions().length }}</div>
+                <app-question />           
+            @if (quizService.answerSelected()) {
+                <div class="next-button" (click)="quizService.goToNextQuestion()">Next Question</div>
+            }
+        </div>
+    }
+
+</div>
