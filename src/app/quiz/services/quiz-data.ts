@@ -34,13 +34,18 @@ export class QuizData {
 
   normalizeQuestions(responseQuestions: IQuestionResponse[]): IQuestion[] {
     return responseQuestions.map((question) => {
-      const incorrectAnswers = question.incorrect_answers.map((answer) => decodeURIComponent(answer));
+      const incorrectAnswers = question.incorrect_answers.map(this.decodeHtmlEntities);
       return {
-        question: decodeURIComponent(question.question),
-        correctAnswer: decodeURIComponent(question.correct_answer),
+        question: this.decodeHtmlEntities(question.question),
+        correctAnswer: this.decodeHtmlEntities(question.correct_answer),
         incorrectAnswers
       }
     })
+  }
+
+  decodeHtmlEntities(str: string) {
+    const doc = new DOMParser().parseFromString(str, 'text/html');
+    return doc.documentElement.textContent ?? str;
   }
 
   selectAnswer(answer: string): void {
