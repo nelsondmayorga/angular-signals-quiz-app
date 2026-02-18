@@ -13,7 +13,10 @@ describe('Answer', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(Answer);
+    fixture.componentRef.setInput('text', 'some text');
+    fixture.componentRef.setInput('index', 'some text');
     component = fixture.componentInstance;
+    
     await fixture.whenStable();
   });
 

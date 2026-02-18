@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Question } from './question';
+import { QuizData } from '../../services/quiz-data';
 
 describe('Question', () => {
   let component: Question;
@@ -8,7 +9,15 @@ describe('Question', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Question]
+      imports: [Question],
+      providers: [{
+        provide: QuizData,
+        useValue: {
+          currentQuestion: () => ({question: 'Mock question'}),
+          currentQuestionAnswers: () => ['A', 'B', 'C', 'D'],
+          answerSelected: () => {}
+        }
+      }]
     })
     .compileComponents();
 

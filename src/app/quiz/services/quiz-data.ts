@@ -19,7 +19,7 @@ export class QuizData {
   answerSelected = signal<string | null>(null);
   correctAnswersCount = signal<number>(0);
   currentQuestion = computed(() => this.questions()[this.currentQuestionIndex()]);
-  currentQuestioinAnswers = computed(() => this.shuffleAnswers(this.currentQuestion()));
+  currentQuestionAnswers = computed(() => this.shuffleAnswers(this.currentQuestion()));
   showResults = computed(() => this.currentQuestionIndex() === this.questions().length);
   isCorrectAnswer = computed(() => this.currentQuestion().correctAnswer === this.answerSelected());
 
